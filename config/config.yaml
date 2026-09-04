@@ -1,0 +1,43 @@
+# =====================================================================
+# Standalone Industrial PPE Kit Detection Demo Configuration
+# =====================================================================
+
+app:
+  name: "PPE Compliance Monitor"
+  zone_name: "JSW Steel — Blast Furnace Zone"
+  camera_id: "CAM-01"
+  model_label: "YOLOv11 v2.0"
+  host: "0.0.0.0"
+  port: 8001
+  debug: false
+
+model:
+  weights_path: "models/new_best(2).pt"
+  secondary_weights_path: "models/new_best(2).pt"
+  device: "cpu"            # 'cpu' or '0' (CUDA GPU)
+  conf_threshold: 0.25      # Confidence threshold for detections
+  iou_threshold: 0.45       # NMS IoU threshold
+  imgsz: 416                # Input resolution for YOLO inference
+
+rules:
+  required_ppe:
+    - "helmet"
+    - "vest"
+    - "gloves"
+    - "gogglppe_demoes"
+    - "shoes"
+  optional_ppe:
+    - "mask"
+
+video:
+  video_dir: "videos"
+  target_fps: 20            # Desired playback FPS
+  process_every_n_frames: 1 # Frame skip factor (1 = every frame)
+  loop_playlist: true       # Continuous playback across all videos
+  auto_next_video: true     # Automatically advance when current video finishes
+  stream_quality: 85        # JPEG compression quality (1-100)
+  max_stream_width: 960     # Resized output width for fast streaming
+
+websocket:
+  enabled: true
+  broadcast_interval_frames: 1
