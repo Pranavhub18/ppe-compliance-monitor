@@ -1,14 +1,3 @@
----
-title: Industrial PPE Kit Detection & Compliance Monitor
-emoji: 🦺
-colorFrom: yellow
-colorTo: blue
-sdk: gradio
-app_file: app.py
-pinned: false
-license: mit
----
-
 # Industrial PPE Kit Detection & Compliance Monitor
 
 A standalone, real-time Industrial PPE (Personal Protective Equipment) Kit Detection and Compliance Monitoring Demo Application built for client demonstrations and cloud deployment on Hugging Face Spaces.
@@ -37,22 +26,18 @@ The application combines **YOLOv11 computer vision models (`models/new_best(2).p
    - Drop any new video file (`.mp4`, `.avi`, `.mkv`, `.mov`) into `videos/`.
    - The backend automatically discovers new files within 2 seconds and updates the playlist over WebSocket without page reload.
 
-5. **Strict Git & Hugging Face Model Isolation**:
-   - `.gitignore` is configured to **only track and push `models/new_best(2).pt`**.
-   - Other local experimental weights (`models/new_best(1).pt`, `models/ppe_multiclass_best.pt`) remain safe on local disk and will never be pushed.
-
 ---
 
 ## 📁 Repository Structure
 
 ```text
-ppe_demo/
+.
 │
 ├── app.py                      # 🚀 Hugging Face entrypoint (Gradio + FastAPI)
 ├── requirements.txt            # 📦 Python dependencies installed by Hugging Face
 ├── packages.txt                # 🐧 Debian packages for OpenCV (ffmpeg, libgl1, etc.)
 ├── README.md                   # 📄 Space metadata header (sdk: gradio, app_file: app.py)
-├── .gitignore                  # 🔒 Crucial: Configured to ONLY push new_best(2).pt
+├── .gitignore                  # 🔒 Configured to only track models/new_best(2).pt
 │
 ├── backend/
 │   ├── app/
@@ -88,7 +73,7 @@ ppe_demo/
 
 ### Option 1: Hugging Face Spaces Deployment
 1. Create a new Space on [Hugging Face](https://huggingface.co/spaces) with SDK set to **Gradio**.
-2. Clone your Space repository locally and copy the contents of `ppe_demo/` into it (or add the remote).
+2. Clone your Space repository locally and copy the contents of this repository into it (or add it as a remote).
 3. Initialize git and push:
    ```bash
    git add .
@@ -139,41 +124,6 @@ python app.py
 
 ---
 
-## ⚙️ Configuration (`config/config.yaml`)
+## ⚙️ Configuration
 
-```yaml
-app:
-  name: "PPE Compliance Monitor"
-  zone_name: "JSW Steel — Blast Furnace Zone"
-  camera_id: "CAM-01"
-  model_label: "YOLOv11 v2.0"
-  host: "0.0.0.0"
-  port: 8001
-  debug: false
-
-model:
-  weights_path: "models/new_best(2).pt"
-  secondary_weights_path: "models/new_best(2).pt"
-  device: "cpu"
-  conf_threshold: 0.25
-  iou_threshold: 0.45
-  imgsz: 416
-
-rules:
-  required_ppe:
-    - "helmet"
-    - "vest"
-    - "gloves"
-    - "goggles"
-    - "shoes"
-  optional_ppe:
-    - "mask"
-
-video:
-  video_dir: "videos"
-  target_fps: 20
-  loop_playlist: true
-  auto_next_video: true
-  stream_quality: 85
-  max_stream_width: 960
-```
+All runtime settings — zone name, model weights path, detection thresholds, required PPE list, and video streaming options — live in [`config/config.yaml`](config/config.yaml). Edit that file directly to change behavior; defaults point to `models/new_best(2).pt` at `conf_threshold: 0.25`.
