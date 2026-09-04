@@ -1,0 +1,64 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Frontend dependencies & logs
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# NOTE: Keep frontend/dist tracked so production SPA assets are bundled for Hugging Face
+!frontend/dist/
+!frontend/dist/**
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =====================================================================
+# Model weights tracking policy:
+# ONLY track and push models/new_best(2).pt to Hugging Face
+# Keep all other weights safely stored locally on disk
+# =====================================================================
+models/*
+!models/new_best(2).pt
+!models/.gitkeep
+
+# Explicit local-only model exclusions
+models/new_best(1).pt
+models/ppe_multiclass_best.pt
