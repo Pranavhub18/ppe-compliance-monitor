@@ -38,7 +38,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# NOTE: Keep frontend/dist tracked so production SPA assets are bundled for Hugging Face
+# NOTE: Keep frontend/dist tracked so production SPA assets are bundled
 !frontend/dist/
 !frontend/dist/**
 
@@ -52,7 +52,7 @@ Thumbs.db
 
 # =====================================================================
 # Model weights tracking policy:
-# ONLY track and push models/new_best(2).pt to Hugging Face
+# ONLY track and push models/new_best(2).pt
 # Keep all other weights safely stored locally on disk
 # =====================================================================
 models/*
